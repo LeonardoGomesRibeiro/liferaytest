@@ -31,8 +31,10 @@ public class Receipt {
         double total = 0;
         for (Product product : products) {
             total += product.getProductPrice().doubleValue();
+            if (product.getProductPriceIncludingTax().doubleValue() > 0) {
+                total += product.getProductPriceIncludingTax().doubleValue() - product.getProductPrice().doubleValue();
+            }
         }
-        total += this.salesTax;
         return new BigDecimal(total).setScale(2, RoundingMode.HALF_UP);
     }
 
